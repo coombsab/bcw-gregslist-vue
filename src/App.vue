@@ -10,6 +10,12 @@
           </span>
         </button>
 
+        <router-link class="navbar-brand d-flex" :to="{ name: 'Home' }">
+          <div class="text-center" v-if="route.name !== 'Home'">
+            <h3>🏠</h3>
+          </div>
+        </router-link>
+
       </div>
       <div class="col-md-10 main-content">
         <router-view />
@@ -32,6 +38,7 @@
 
 <script>
 import { computed } from 'vue'
+import { useRoute } from "vue-router"
 import { AppState } from './AppState'
 import ClassifiedForm from './components/ClassifiedForm.vue'
 import Login from './components/Login.vue'
@@ -39,9 +46,11 @@ import Navbar from './components/Navbar.vue'
 
 export default {
   setup() {
+    const route = useRoute();
     return {
+      route,
       appState: computed(() => AppState),
-      account: computed(() => AppState.account)
+      account: computed(() => AppState.account),
     }
   },
   components: { Navbar, Login, ClassifiedForm }

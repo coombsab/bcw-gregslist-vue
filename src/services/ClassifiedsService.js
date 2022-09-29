@@ -20,6 +20,7 @@ class ClassifiedsService {
   async getClassifiedById(id) {
     const res = await SandboxApi.get(`/api/classifieds/${id}`)
     AppState.activeClassified = new Classified(res.data) // Not a POJO!!!
+    console.log("ACTIVE CLASSIFIED", AppState.activeClassified)
   }
 
 

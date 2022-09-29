@@ -3,14 +3,13 @@
     <div class="row">
       <div class="col-lg-3 col-md-4 my-3" v-for="c in classifieds" :key="c.id">
         <div v-if="c.listingType == 'Car'">
-          <router-link :to="{
-            name: 'Details',
-            params:{
-              id: c.id
-            }
-          }">
-            <CarCard :car="c.listing" :seller="c.seller" @deleteClassified="deleteClassified(c.id)" />
-          </router-link>
+            <CarCard :car="c.listing" :seller="c.seller" :classifiedId="c.id" @deleteClassified="deleteClassified(c.id)" />
+        </div>
+        <div v-else-if="c.listingType == 'House'">
+          <HouseCard :house="c.listing" :seller="c.seller" :classifiedId="c.id" @deleteClassified="deleteClassified(c.id)"/>
+        </div>
+        <div v-else-if="c.listingType == 'Job'">
+          <JobCard :job="c.listing" :seller="c.seller" :classifiedId="c.id" @deleteClassified="deleteClassified(c.id)"/>
         </div>
       </div>
     </div>
@@ -24,10 +23,11 @@ import { AppState } from '../AppState.js';
 import CarCard from '../components/CarCard.vue';
 import { classifiedsService } from '../services/ClassifiedsService.js';
 import Pop from '../utils/Pop.js';
+import JobCard from "../components/JobCard.vue";
+import HouseCard from "../components/HouseCard.vue";
 
 export default {
   setup() {
-
     async function getClassifieds() {
       try {
         await classifiedsService.getClassifieds()
@@ -53,7 +53,7 @@ export default {
       }
     };
   },
-  components: { CarCard }
+  components: { CarCard, JobCard, HouseCard }
 }
 </script>
 
