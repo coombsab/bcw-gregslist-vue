@@ -1,7 +1,7 @@
 <template>
   <main class="container-fluid">
     <div class="row">
-      <div class="col-md-2 d-none d-md-block bg-dark text-light sidebar">
+      <div class="col-md-2 d-none d-md-block bg-dark text-light sidebar text-center">
         <Login />
 
         <button class="btn" data-bs-target="#classifiedsCanvas" data-bs-toggle="offcanvas" v-if="account.id">
@@ -10,11 +10,7 @@
           </span>
         </button>
 
-        <router-link class="navbar-brand d-flex" :to="{ name: 'Home' }">
-          <div class="text-center" v-if="route.name !== 'Home'">
-            <h3>🏠</h3>
-          </div>
-        </router-link>
+        <NavButtons/>
 
       </div>
       <div class="col-md-10 main-content">
@@ -43,6 +39,7 @@ import { AppState } from './AppState'
 import ClassifiedForm from './components/ClassifiedForm.vue'
 import Login from './components/Login.vue'
 import Navbar from './components/Navbar.vue'
+import NavButtons from './components/NavButtons.vue'
 
 export default {
   setup() {
@@ -53,7 +50,7 @@ export default {
       account: computed(() => AppState.account),
     }
   },
-  components: { Navbar, Login, ClassifiedForm }
+  components: { Navbar, Login, ClassifiedForm, NavButtons }
 }
 </script>
 <style lang="scss">

@@ -12,6 +12,8 @@ export const AppState = reactive({
   classifieds: [],
 
   /** @type {import('./models/Classified.js').Classified | null} */
-  activeClassified: null
+  activeClassified: null,
+
+  filter: ""
 
 })

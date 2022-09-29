@@ -4,9 +4,13 @@ import { SandboxApi } from "./AxiosService.js"
 
 class ClassifiedsService {
 
-  async getClassifieds() {
+  async getClassifieds(filter = "") {
     const res = await SandboxApi.get('api/classifieds')
-    AppState.classifieds = res.data.map(c => new Classified(c))
+    if (filter) {
+      AppState.classifieds = res.data.map(c => new Classified(c)).filter(c => c.listingType === filter)
+    } else {
+      AppState.classifieds = res.data.map(c => new Classified(c))
+    }
   }
 
 
